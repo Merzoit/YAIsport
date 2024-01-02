@@ -2,26 +2,32 @@ YAISport - проект, содержащий статистику по спор
 
 Получение данных по средствам API. https://www.api-football.com/
 
-YAISport/
-|-- core/
-|   |-- templates/
-|   |   |-- include/
-|   |-- admin.py
-|   |-- apps.py
-|   |-- data.py
-|   |-- models.py
-|   |-- urls.py
-|   |-- utils.py
-|   |-- urls.py
-|-- logs/
-|   |-- logfile.log
-|-- site1/
-|   |-- asgi.py
-|   |-- wsgi.py
-|   |-- settings.py
-|   |-- urls.py
-|-- static/
-|   |-- css/
-|   |-- image/
-|   |-- admin/
-|-- manage.py
+# YAISport
+
+- **core/**
+  - templates/
+    - include/
+  - admin.py
+  - apps.py
+  - data.py
+  - models.py
+  - urls.py
+  - utils.py
+  - urls.py
+
+- **logs/**
+  - logfile.log
+
+- **site1/**
+  - asgi.py
+  - wsgi.py
+  - settings.py
+  - urls.py
+
+- **static/**
+  - css/
+  - image/
+  - admin/
+
+- manage.py
+
