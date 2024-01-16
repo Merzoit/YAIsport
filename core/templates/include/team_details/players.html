@@ -1,0 +1,107 @@
+<div class="row">
+    <h4 style="color: white">Топ игроков</h4>
+    <div class="col-md-6">
+        <div class="card mb-3 bg-opacity">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{ top_players.key_player.player.photo }}" class="img-fluid rounded-start" alt="{{ top_players.key_player.player.name }}" width="100%" height="100%">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title" style="color: red;">Самый высокорейтинговый игрок</h5>
+                        <h5 class="card-title">{{ top_players.key_player.player.name }}</h5>
+                        <p class="card-text">
+                            <b>Позиция: </b>{{ top_players.key_player.position }}<br>
+                            <b style="color: red">Рейтинг: </b>{{ top_players.key_player.rating|floatformat:2 }}<br>
+                            <b>Минут на поле: </b>{{ top_players.key_player.minutes }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     <div class="col-md-6">
+        <div class="card mb-3 bg-opacity">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{ top_players.goal_player.player.photo }}" class="img-fluid rounded-start" alt="{{ top_players.goal_player.player.name }}" width="100%" height="100%">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title" style="color: red;">Бомбордир</h5>
+                        <h5 class="card-title">{{ top_players.goal_player.player.name }}</h5>
+                        <p class="card-text">
+                            <b>Позиция: </b>{{ top_players.goal_player.position }}<br>
+                            <b>Рейтинг: </b>{{ top_players.goal_player.rating|floatformat:2 }}<br>
+                            <b>Минут на поле: </b>{{ top_players.goal_player.minutes }}<br>
+                            <b style="color: red">Голов: </b>{{ top_players.goal_player.goals_total }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card mb-3 bg-opacity">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{ top_players.minute_player.player.photo }}" class="img-fluid rounded-start" alt="{{ top_players.minute_player.player.name }}" width="100%" height="100%">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title" style="color: red;">Ключевой игрок</h5>
+                        <h5 class="card-title">{{ top_players.minute_player.player.name }}</h5>
+                        <p class="card-text">
+                            <b>Позиция: </b>{{ top_players.minute_player.position }}<br>
+                            <b>Рейтинг: </b>{{ top_players.minute_player.rating|floatformat:2 }}<br>
+                            <b style="color: red">Минут на поле: </b>{{ top_players.minute_player.minutes }}<br>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card mb-3 bg-opacity">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{ top_players.passes_player.player.photo }}" class="img-fluid rounded-start" alt="{{ top_players.passes_player.player.name }}" width="100%" height="100%">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title" style="color: red;">Раздающий</h5>
+                        <h5 class="card-title">{{ top_players.passes_player.player.name }}</h5>
+                        <p class="card-text">
+                            <b>Позиция: </b>{{ top_players.passes_player.position }}<br>
+                            <b>Рейтинг: </b>{{ top_players.passes_player.rating|floatformat:2 }}<br>
+                            <b>Минут на поле: </b>{{ top_players.passes_player.minutes }}<br>
+                            <b style="color: red">Успешных передач: </b>{{ top_players.passes_player.passes_accuracy|floatformat:0 }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h4 style="color: white">Все игроки</h4>
+    {% for player, player_statistic in player_data %}
+    <div class="col-md-6">
+        <div class="card mb-3 bg-opacity">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{ player.photo }}" class="img-fluid rounded-start" alt="{{ player.name }}" width="100%" height="100%">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ player.name }}</h5>
+                        <p class="card-text">
+                            <b>Позиция: </b>{{ player_statistic.position }}<br>
+                            <b>Рейтинг: </b>{{ player_statistic.rating|floatformat:2 }}<br>
+                            <b>Минут на поле: </b>{{ player_statistic.minutes }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>

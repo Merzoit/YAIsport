@@ -1,0 +1,57 @@
+{% extends 'menu.html' %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static '/css/team_list.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row mb-4">
+        <div class="col">
+            <select class="form-select" id="leagueFilter" onchange="filterTeamsByLeague()">
+                <option value="">Выберите лигу</option>
+                {% for league in leagues %}
+                <option value="{{ league.id }}">{{ league.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        {% for team in teams %}
+        <div class="col-lg-4 col-md-6 mb-4 team-card" data-league="{{ team.league.id }}">
+            <div class="card h-100 bg-opacity">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="{{ team.logo_url }}" class="img-fluid rounded-start" alt="{{ team.name }} logo">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ team.name }}</h5>
+                            <p class="card-text">Страна: {{ team.country.name }}</p>
+                            <p class="card-text">Лига: {% for l in team.league.all %} {{ l.name }} {% endfor %}</p>
+                            <a href="{% url 'team_details' team_id=team.id %}" class="btn btn-primary">Перейти</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+function filterTeamsByLeague() {
+    var selectedLeague = document.getElementById('leagueFilter').value;
+    var teamCards = document.querySelectorAll('.team-card');
+
+    teamCards.forEach(function(card) {
+        if (selectedLeague === "" || card.getAttribute('data-league') === selectedLeague) {
+            card.style.display = '';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+</script>
+{% endblock %}

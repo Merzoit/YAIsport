@@ -1,0 +1,13 @@
+<div class="row">
+    {% for match in matches.all %}
+    <div class="col-md-6">
+        <div class="card mb-3 bg-opacity">
+            <div class="card-body">
+                <h5 class="card-title">{{ match.team_home.name }} vs {{ match.team_away.name }}</h5>
+                <p class="card-text">Дата: {{ match.date }}</p>
+                <p class="card-text">Стадион: {{ match.venue.name }}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>

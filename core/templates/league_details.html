@@ -1,0 +1,116 @@
+{% extends 'menu.html' %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static '/css/league_details.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container py-1">
+  <div class="row mb-4" style="max-width: 900px; margin: auto;">
+    <div class="col-lg-12">
+      <div class="card shadow-lg bg-opacity">
+        <div class="row g-0">
+          <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+            <img src="{{ league.logo_url }}" class="img-fluid rounded" alt="{{ league.name }} logo">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body text-center text-md-start" style="background-color: 0000009c; text-align: center;">
+              <h2 class="card-title text-primary">{{ league.name }}</h2>
+              <p class="card-text"><strong>Страна:</strong> {{ league.country.name }}</p>
+              <p class="card-text"><strong>Сезон:</strong> {{ league.season }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+      <nav>
+  <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
+    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Таблица</button>
+    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Предстоящие матчи</button>
+    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Прошедшие матчи</button>
+  </div>
+          <br>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+      <div class="col-lg-12">
+      <div class="table-responsive bg-opacity">
+        <table class="table table-hover">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Команда</th>
+              <th scope="col">Игр</th>
+              <th scope="col">Победа</th>
+              <th scope="col">Ничья</th>
+              <th scope="col">Поражение</th>
+              <th scope="col">ГЗ/ГП</th>
+              <th scope="col">Очки</th>
+              <th scope="col">Форма</th>
+            </tr>
+          </thead>
+          <tbody style="background-color: #ffffff9c">
+            {% for team in league_table %}
+            <tr>
+              <th scope="row">{{ team.position }}</th>
+              <td><a href="{% url 'team_details' team_id=team.team.id %}">{{ team.team }}</a></td>
+              <td>{{ team.played }}</td>
+              <td>{{ team.win }}</td>
+              <td>{{ team.draw }}</td>
+              <td>{{ team.lose }}</td>
+              <td>{{ team.goal_for }}/{{ team.goal_against }}</td>
+              <td>{{ team.points }}</td>
+              <td>{{ team.form }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+      <div class="row mb-4">
+        <div class="col">
+            <select class="form-select" id="countryFilter" onchange="filterLeaguesByCountry()">
+                <option value="">Выберите дату</option>
+                {% for country in countries %}
+                <option value="{{ country.id }}">{{ country.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+      <div class="row">
+    {% for fixture in league_fixture %}
+    <div class="col-lg-4 col-md-6 mb-4 team-card" data-league="{{ team.league.id }}">
+        <div class="card h-100 bg-opacity">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{ fixture.team_home.logo_url }}" class="img-fluid rounded-start" alt="{{ fixture.team_home.name }} logo">
+                    <img src="{{ fixture.team_away.logo_url }}" class="img-fluid rounded-start" alt="{{ fixture.team_away.name }} logo">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ fixture.date }}</h5>
+                        <p class="card-text">Страна: {{ team.country.name }}</p>
+                        <p class="card-text">Лига: {% for l in team.league.all %} {{ l.name }} {% endfor %}</p>
+                        <a href="" class="btn btn-primary">Перейти</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+  </div>
+  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">...</div>
+</div>
+
+  </div>
+    <br>
+
+</div>
+{% endblock %}

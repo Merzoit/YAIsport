@@ -1,0 +1,116 @@
+{% extends 'menu.html' %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/match_list.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5 team-details">
+    <!-- Навигационные вкладки -->
+    <nav>
+        <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
+            <button class="nav-link active" id="nav-teamStatistics-tab" data-bs-toggle="tab" data-bs-target="#nav-finished" type="button" role="tab" aria-controls="nav-finished" aria-selected="true">Прошедшие матчи</button>
+            <button class="nav-link" id="nav-teamPlayers-tab" data-bs-toggle="tab" data-bs-target="#nav-teamPlayers" type="button" role="tab" aria-controls="nav-teamPlayers" aria-selected="false">Предстоящие матчи</button>
+        </div>
+    </nav>
+    <br>
+
+    <!-- Содержимое вкладок -->
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-finished" role="tabpanel" aria-labelledby="nav-teamStatistics-tab">
+            <div class="container mt-5">
+                <div class="row mb-4">
+                    <div class="col">
+                        <select class="form-select" id="leagueFilter" onchange="filterTeamsByLeague()">
+                            <option value="">Выберите лигу</option>
+                            {% for league in leagues %}
+                            <option value="{{ league.id }}">{{ league.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    {% for fixture in fixtures_finished %}
+                    <div class="col">
+                        <div class="card h-100 bg-opacity">
+                            <div class="card-header text-center">
+                                <strong>{{ fixture.team_home.name }} vs {{ fixture.team_away.name }}</strong>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex justify-content-around align-items-center mb-3">
+                                    <img src="{{ fixture.team_home.logo_url }}" class="img-fluid" style="max-height: 70px;" alt="{{ fixture.team_home.name }} logo">
+                                    <div class="score-display">{{ fixture.goals_home }} - {{ fixture.goals_away }}</div>
+                                    <img src="{{ fixture.team_away.logo_url }}" class="img-fluid" style="max-height: 70px;" alt="{{ fixture.team_away.name }} logo">
+                                </div>
+                                <p class="card-text text-center mb-4">
+                                    Дата: {{ fixture.date }}<br>
+                                    Стадион: {{ fixture.venue.name }}
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="{% url 'match_details' fixture_id=fixture.id %}" class="btn btn-primary w-100">Перейти</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!-- Игроки -->
+        <div class="tab-pane fade" id="nav-teamPlayers" role="tabpanel" aria-labelledby="nav-teamPlayers-tab">
+            <div class="container mt-5">
+                <div class="row mb-4">
+                    <div class="col">
+                        <select class="form-select" id="leagueFilter" onchange="filterTeamsByLeague()">
+                            <option value="">Выберите лигу</option>
+                            {% for league in leagues %}
+                            <option value="{{ league.id }}">{{ league.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    {% for fixture in fixtures_waited %}
+                    <div class="col">
+                        <div class="card h-100 bg-opacity">
+                            <div class="card-header text-center">
+                                <strong>{{ fixture.team_home.name }} vs {{ fixture.team_away.name }}</strong>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex justify-content-around align-items-center mb-3">
+                                    <img src="{{ fixture.team_home.logo_url }}" class="img-fluid" style="max-height: 70px;" alt="{{ fixture.team_home.name }} logo">
+                                    <div class="score-display">{{ fixture.goals_home }} - {{ fixture.goals_away }}</div>
+                                    <img src="{{ fixture.team_away.logo_url }}" class="img-fluid" style="max-height: 70px;" alt="{{ fixture.team_away.name }} logo">
+                                </div>
+                                <p class="card-text text-center mb-4">
+                                    Дата: {{ fixture.date }}<br>
+                                    Стадион: {{ fixture.venue.name }}
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="{% url 'match_prediction' fixture_id=fixture.id %}" class="btn btn-primary w-100">Перейти</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+function filterTeamsByLeague() {
+    var selectedLeague = document.getElementById('leagueFilter').value;
+    var teamCards = document.querySelectorAll('.team-card');
+
+    teamCards.forEach(function(card) {
+        if (selectedLeague === "" || card.getAttribute('data-league') === selectedLeague) {
+            card.style.display = '';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+</script>
+{% endblock %}

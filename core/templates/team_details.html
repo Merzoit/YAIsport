@@ -1,0 +1,41 @@
+{% extends 'menu.html' %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/team_details.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5 team-details">
+	{% include "include/team_details/three_logo.html" %}
+
+    <!-- Навигационные вкладки -->
+    <nav>
+        <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist"  style="margin: auto">
+            <button class="nav-link " style="background-color: white;" id="nav-teamStatistics-tab" data-bs-toggle="tab" data-bs-target="#nav-teamStatistics" type="button" role="tab" aria-controls="nav-teamStatistics" aria-selected="true">Статистика</button>
+            <button class="nav-link " style="background-color: white;" id="nav-teamPlayers-tab" data-bs-toggle="tab" data-bs-target="#nav-teamPlayers" type="button" role="tab" aria-controls="nav-teamPlayers" aria-selected="false">Игроки</button>
+            <button class="nav-link " style="background-color: white;" id="nav-upcomingMatches-tab" data-bs-toggle="tab" data-bs-target="#nav-upcomingMatches" type="button" role="tab" aria-controls="nav-upcomingMatches" aria-selected="false">Предстоящие матчи</button>
+        </div>
+    </nav>
+    <br>
+
+    <!-- Содержимое вкладок -->
+    <div class="tab-content text-center" id="nav-tabContent">
+            <!-- Статистика команды -->
+        <div class="tab-pane fade show active" id="nav-teamStatistics" role="tabpanel" aria-labelledby="nav-teamStatistics-tab" tabindex="0">
+			{% include "include/team_details/statistic.html" %}
+        </div>
+        	<!-- Игроки -->
+        <div class="tab-pane fade" id="nav-teamPlayers" role="tabpanel" aria-labelledby="nav-teamPlayers-tab" tabindex="0">
+        	{% include "include/team_details/players.html" %}
+        </div>
+        	<!-- Предстоящие матчи -->
+		<div class="tab-pane fade" id="nav-upcomingMatches" role="tabpanel" aria-labelledby="nav-upcomingMatches-tab" tabindex="0">
+		    {% include "include/team_details/next_matchs.html" %}
+		</div>
+    </div>
+</div>
+<br>
+{% endblock %}
+
+

@@ -1,0 +1,178 @@
+<div class="row mb-4">
+    <div class="col-lg-12">
+        <div class="statistics-card shadow">
+            <div class="card-info">
+                <div class="bg-opacity">
+                    <h3 class="statistics-title" style="text-align: center;">Статистика в лиге</h3>
+                    <h5 class="statistics-text" style="text-align: center;"><a style="color: white;" href="{% url 'league_details' league_id=table.league.id %}">{{ table.league }}</a></h5>
+                    <table class="table table-hover">
+                        <thead class="table" style="color:white;">
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Команда</th>
+                                <th scope="col">Игр</th>
+                                <th scope="col">Победа</th>
+                                <th scope="col">Ничья</th>
+                                <th scope="col">Поражение</th>
+                                <th scope="col">ГЗ/ГП</th>
+                                <th scope="col">Очки</th>
+                                <th scope="col">Форма</th>
+                            </tr>
+                        </thead>
+                        <tbody style="background-color: rgba(255, 255, 255, 0.30); color: white;">
+                            <tr>
+                                <th scope="row">{{ table.position }}</th>
+                                <td>{{ table.team }}</td>
+                                <td>{{ table.played }}</td>
+                                <td>{{ table.win }}</td>
+                                <td>{{ table.draw }}</td>
+                                <td>{{ table.lose }}</td>
+                                <td>{{ table.goal_for }}/{{ table.goal_against }}</td>
+                                <td>{{ table.points }}</td>
+                                <td>{{ table.form }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="container my-4">
+            <!-- Статистика Дома -->
+            <br>
+            <div class="row bg-opacity" style="color: white;">
+                <h3 class="mt-3">Статистика Дома</h3>
+                <h4>{{ team.name }} | Противник</h4>
+                <div class="col-md-6">
+                    <table class="table table-bordered" style="color: white;">
+                        <thead>
+                            <tr>
+                                <th>Показатель</th>
+                                <th>Значение</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for key, value in stat.home_stat.for.items %}
+                            <tr>
+                                <td>{{ key }}</td>
+                                <td>{{ value|floatformat:0 }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <table class="table table-bordered" style="color: white;">
+                        <thead>
+                            <tr>
+                                <th>Показатель</th>
+                                <th>Значение</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for key, value in stat.home_stat.against.items %}
+                            <tr>
+                                <td>{{ key }}</td>
+                                <td>{{ value|floatformat:0 }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br>
+            <!-- Статистика В Гостях -->
+            <div class="row bg-opacity" style="color: white;">
+                <h3 class="mt-3">Статистика В Гостях</h3>
+                <h4>{{ team.name }} | Противник</h4>
+                <div class="col-md-6">
+                    <table class="table table-bordered" style="color: white;">
+                        <thead>
+                            <tr>
+                                <th>Показатель</th>
+                                <th>Значение</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for key, value in stat.away_stat.for.items %}
+                            <tr>
+                                <td>{{ key }}</td>
+                                <td>{{ value|floatformat:0 }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <table class="table table-bordered" style="color: white;">
+                        <thead>
+                            <tr>
+                                <th>Показатель</th>
+                                <th>Значение</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for key, value in stat.away_stat.against.items %}
+                            <tr>
+                                <td>{{ key }}</td>
+                                <td>{{ value|floatformat:0 }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Общая Статистика -->
+            <br>
+            <div class="row bg-opacity" style="color: white;">
+                <h3 class="mt-3">Общая Статистика</h3>
+                <h4>{{ team.name }} | Противник</h4>
+                <div class="col-md-6">
+                    <table class="table table-bordered" style="color: white;">
+                        <thead>
+                            <tr>
+                                <th>Показатель</th>
+                                <th>Значение</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for key, value in stat.total.for.items %}
+                            <tr>
+                                <td>{{ key }}</td>
+                                <td>{{ value|floatformat:0 }}</td>
+                            </tr>
+                            {% endfor %}
+                            <tr>
+                                <td>Голов</td>
+                                <td>{{ table.goal_for }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <table class="table table-bordered" style="color: white;">
+                        <thead>
+                            <tr>
+                                <th>Показатель</th>
+                                <th>Значение</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for key, value in stat.total.against.items %}
+                            <tr>
+                                <td>{{ key }}</td>
+                                <td>{{ value|floatformat:0 }}</td>
+                            </tr>
+                            {% endfor %}
+                            <tr>
+                                <td>Голов</td>
+                                <td>{{ table.goal_against }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

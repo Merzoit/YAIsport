@@ -1,0 +1,141 @@
+{% extends 'menu.html' %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/match_prediction.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container py-1">
+  <div class="row justify-content-center mb-4 align-items-center">
+    <div class="col-12 text-center">
+      <h2 style="color: white">Предсказания матча</h2>
+    </div>
+  </div>
+
+  <!-- Логотипы команд и их названия -->
+  <div class="row justify-content-center align-items-center bg-opacity">
+    <div class="col-auto text-center">
+      <img src="{{ fixture_prediction.fixture.team_home.logo_url }}" class="team-logo" alt="Home Team Logo">
+      <h3><a style="color: white" href="{% url 'team_details' team_id=fixture_prediction.fixture.team_home.id %}">{{ fixture_prediction.fixture.team_home.name }}</a></h3>
+    </div>
+    <div class="col-auto text-center">
+      <img src="{{ fixture_prediction.fixture.team_away.logo_url }}" class="team-logo" alt="Away Team Logo">
+      <h3><a style="color: white" href="{% url 'team_details' team_id=fixture_prediction.fixture.team_away.id %}">{{ fixture_prediction.fixture.team_away.name }}</a></h3>
+    </div>
+  </div>
+
+  <div class="prediction-container bg-opacity text-center">
+    <h4>Основные ожидания</h4>
+    <!-- Таблица статистики -->
+    <table class="stats-table bg-opacity">
+      <thead>
+        <tr>
+          <th>Показатель</th>
+          <th>Значение</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>Дата матча</b></td>
+          <td>{{ fixture_prediction.fixture.date }}</td>
+        </tr>
+        <tr>
+          <td><b>Время</b></td>
+          <td>{{ fixture_prediction.fixture.time }}</td>
+        </tr>
+        <tr>
+          <td><b>Лига</b></td>
+          <td><a href="{% url 'league_details' league_id=fixture_prediction.fixture.league.id %}">{{ fixture_prediction.fixture.league.name }}<a/></td>
+        </tr>
+        <tr>
+          <td><b>Ожидаемый победитель</b></td>
+          <td>{{ fixture_prediction.winner.name }} <em>({{ fixture_prediction.winner_comment }})</em></td>
+        </tr>
+        <tr>
+          <td><b>Ожидаемый тотал</b></td>
+          <td>{{ fixture_prediction.under_over }}</td>
+        </tr>
+        <tr>
+          <td><b>Индивидуальный тотал</b></td>
+          <td><b style="color: red">{{ fixture_prediction.fixture.team_home.name}}: {{ fixture_prediction.goals_home }}</b>, <b style="color: blue">{{ fixture_prediction.fixture.team_away.name}}: {{ fixture_prediction.goals_away }}</b></td>
+        </tr>
+        <tr>
+          <td><b>Ожидание</b></td>
+          <td><b style="color: green">{{ fixture_prediction.advice }}</b></td>
+        </tr>
+        <!-- Добавьте остальные статистические показатели здесь -->
+      </tbody>
+    </table>
+    <br>
+    <h4>Сетка шансов</h4>
+    <!-- Сетка шансов -->
+    <div class="chance-grid">
+      <div class="chance-item">{{ fixture_prediction.fixture.team_home.name}}: {{ fixture_prediction.percent_home }}</div>
+      <div class="chance-item">Ничья: {{ fixture_prediction.percent_draw }}</div>
+      <div class="chance-item">{{ fixture_prediction.fixture.team_away.name}}: {{ fixture_prediction.percent_away }}</div>
+    </div>
+  <br>
+    <h4>Сравнение показателей</h4>
+    <em style="font-size: 10px;">Синий-домашняя, белый-гостевая команды.</em>
+    <!-- Прогресс-бары и другие метрики -->
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <div class="progress-block bg-opacity">
+          <h6>Форма</h6>
+          <div class="progress" role="progressbar" aria-label="Форма" aria-valuenow="{{ fixture_prediction.com_form_home }}" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar bg-info" style="width: {{ fixture_prediction.com_form_home }}"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="progress-block bg-opacity">
+          <h6>Атака</h6>
+          <div class="progress" role="progressbar" aria-label="Атака" aria-valuenow="{{ fixture_prediction.com_att_home }}" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar bg-info" style="width: {{ fixture_prediction.com_att_home }}"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="progress-block bg-opacity">
+          <h6>Защита</h6>
+          <div class="progress" role="progressbar" aria-label="Защита" aria-valuenow="{{ fixture_prediction.com_def_home }}" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar bg-info" style="width: {{ fixture_prediction.com_def_home }}"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="progress-block bg-opacity">
+          <h6>Показатель Пауссона</h6>
+          <div class="progress" role="progressbar" aria-label="Пауссон" aria-valuenow="{{ fixture_prediction.com_distr_home }}" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar bg-info" style="width: {{ fixture_prediction.com_distr_home }}"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="progress-block bg-opacity">
+          <h6>Личные встречи</h6>
+          <div class="progress" role="progressbar" aria-label="Личные встречи" aria-valuenow="{{ fixture_prediction.com_h2h_home }}" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar bg-info" style="width: {{ fixture_prediction.com_h2h_home }}"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="progress-block bg-opacity">
+          <h6>Голы</h6>
+          <div class="progress" role="progressbar" aria-label="Голы" aria-valuenow="{{ fixture_prediction.com_goals_home }}" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar bg-info" style="width: {{ fixture_prediction.com_goals_home }}"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="progress-block bg-opacity">
+          <h6>Общий показатель</h6>
+          <div class="progress" role="progressbar" aria-label="Общий показатель" aria-valuenow="{{ fixture_prediction.com_total_home }}" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar bg-info" style="width: {{ fixture_prediction.com_total_home }}"></div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'menu.html' %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/league_list.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row mb-4">
+        <div class="col">
+            <select class="form-select" id="countryFilter" onchange="filterLeaguesByCountry()">
+                <option value="">Выберите страну</option>
+                {% for country in countries %}
+                <option value="{{ country.id }}">{{ country.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        {% for league in leagues %}
+        <div class="col-md-4 mb-4 league-card" data-country="{{ league.country.id }}">
+            <div class="card h-100 bg-opacity">
+                <img src="{{ league.logo_url }}" class="card-img-top" alt="{{ league.name }} logo">
+                <div class="card-body">
+                    <h5 class="card-title">Лига: {{ league.name }}</h5>
+                    <p class="card-text">Страна: {{ league.country.name }}</p>
+                    <p class="card-text">Сезон: {{ league.season }}</p>
+                    <a href="{% url 'league_details' league_id=league.id %}" class="btn btn-primary">Перейти</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+function filterLeaguesByCountry() {
+    var selectedCountry = document.getElementById('countryFilter').value;
+    var leagueCards = document.querySelectorAll('.league-card');
+
+    leagueCards.forEach(function(card) {
+        if (selectedCountry === "" || card.getAttribute('data-country') === selectedCountry) {
+            card.style.display = '';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+</script>
+{% endblock %}
+

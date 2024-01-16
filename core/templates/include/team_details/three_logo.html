@@ -1,0 +1,35 @@
+<!-- Team Info -->
+<div class="row mb-4">
+    <div class="col-lg-4">
+        <div class="card mb-3 bg-opacity">
+            <img src="{{ team.logo_url }}" class="card-img-top" alt="Логотип команды">
+            <div class="card-body">
+                <h5 class="card-title"><b>{{ team.name }}</b></h5>
+                <p><i style="font-size: 12px">{{ team.country.name }}, {{ team.league.first }}</i></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stadium Info -->
+    <div class="col-lg-4">
+        <div class="card mb-3 bg-opacity">
+            <img src="{{ venue.image }}" class="card-img-top" alt="Фото стадиона">
+            <div class="card-body">
+                <h5 class="card-title"><b>Стадион: {{ venue.name }}</b></h5>
+                <p><i style="font-size: 12px;">Вместительность: {{ venue.capacity }}</i></p>
+                <p class="card-text">{{ venue.description }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Coach Info -->
+    <div class="col-lg-4">
+        <div class="card mb-3 bg-opacity">
+            <img src="{{ coach.photo }}" class="card-img-top" alt="Фото тренера">
+            <div class="card-body">
+                <h5 class="card-title"><b>Тренер: {{ coach.name }}</b></h5>
+                <p><i style="font-size: 12px">{{ coach.first_name }} {{ coach.last_name }}</i></p>
+            </div>
+        </div>
+    </div>
+</div>

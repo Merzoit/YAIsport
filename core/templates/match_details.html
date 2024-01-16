@@ -1,0 +1,127 @@
+{% extends 'menu.html' %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/match_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container py-1">
+  <br>
+  <div class="row justify-content-center mb-4 align-items-center">
+    <!-- Логотип домашней команды -->
+    <div class="col-auto text-center bg-opacity">
+      <img src="{{ fixture.team_home.logo_url }}" class="team-logo" alt="Home Team Logo">
+    </div>
+    <!-- Логотип гостевой команды -->
+    <div class="col-auto text-center bg-opacity">
+      <img src="{{ fixture.team_away.logo_url }}" class="team-logo" alt="Away Team Logo">
+    </div>
+  </div>
+
+  </div>
+<div class="bg-opacity desc text-center">
+  <b><a href="#">{{ fixture.team_home.name }}</a> - <a href="#">{{ fixture.team_away.name }}</a></b><br>
+  <span class="score">{{ fixture.goals_home }} - {{ fixture.goals_away }}</span><br>
+  Дата: {{ fixture.date }}<br>
+  Время: {{ fixture.time }}<br>
+  <em>Стадион: {{ fixture.venue.name }}</em><br>
+  {{ fixture.league.country.name }}, <a href="#">{{ fixture.league.name }}</a>
+</div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="stats-container bg-opacity">
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span class="stat-value left">{{ fixture_statistic.home_on_goal }}</span>
+                <span class="stat-name">Ударов в створ</span>
+                <span class="stat-value right">{{ fixture_statistic.away_on_goal }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span class="stat-value left">{{ fixture_statistic.home_off_goal }}</span>
+                <span class="stat-name">Ударов мимо ворот</span>
+                <span class="stat-value right">{{ fixture_statistic.away_off_goal }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span class="stat-value left">{{ fixture_statistic.home_total_shots }}</span>
+                <span class="stat-name">Всего ударов</span>
+                <span class="stat-value right">{{ fixture_statistic.away_total_shots }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span class="stat-value left">{{ fixture_statistic.home_blocked_shots }}</span>
+                <span class="stat-name">Заблокированные удары</span>
+                <span class="stat-value right">{{ fixture_statistic.away_blocked_shots }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span class="stat-value left">{{ fixture_statistic.home_shots_inside_box }}</span>
+                <span class="stat-name">Удары из штрафной площади</span>
+                <span class="stat-value right">{{ fixture_statistic.away_shots_inside_box }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span class="stat-value left">{{ fixture_statistic.home_shots_outside_box }}</span>
+                <span class="stat-name">Удары из-за штрафной площади</span>
+                <span class="stat-value right">{{ fixture_statistic.away_shots_outside_box }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span class="stat-value left">{{ fixture_statistic.home_fouls }}</span>
+                <span class="stat-name">Фолы</span>
+                <span class="stat-value right">{{ fixture_statistic.away_fouls }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span class="stat-value left">{{ fixture_statistic.home_corner_kicks }}</span>
+                <span class="stat-name">Угловые удары</span>
+                <span class="stat-value right">{{ fixture_statistic.away_corner_kicks }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span class="stat-value left">{{ fixture_statistic.home_offsides }}</span>
+                <span class="stat-name">Офсайды</span>
+                <span class="stat-value right">{{ fixture_statistic.away_offsides }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span class="stat-value left">{{ fixture_statistic.home_ball_possession }}</span>
+                <span class="stat-name">Владение мячом</span>
+                <span class="stat-value right">{{ fixture_statistic.away_ball_possession }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span class="stat-value left">{{ fixture_statistic.home_yellow_cards }}</span>
+                <span class="stat-name">Желтые карточки</span>
+                <span class="stat-value right">{{ fixture_statistic.away_yellow_cards }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span class="stat-value left">{{ fixture_statistic.home_red_cards }}</span>
+                <span class="stat-name">Красные карточки</span>
+                <span class="stat-value right">{{ fixture_statistic.away_red_cards }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span class="stat-value left">{{ fixture_statistic.home_goalkeeper_saves }}</span>
+                <span class="stat-name">Сейвы вратаря</span>
+                <span class="stat-value right">{{ fixture_statistic.away_goalkeeper_saves }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span class="stat-value left">{{ fixture_statistic.home_total_passes }}</span>
+                <span class="stat-name">Всего пасов</span>
+                <span class="stat-value right">{{ fixture_statistic.away_total_passes }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span class="stat-value left">{{ fixture_statistic.home_passes_accurate }}</span>
+                <span class="stat-name">Точные пасы</span>
+                <span class="stat-value right">{{ fixture_statistic.away_passes_accurate }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span class="stat-value left">{{ fixture_statistic.home_passes_percentage }}</span>
+                <span class="stat-name">Процент точных пасов</span>
+                <span class="stat-value right">{{ fixture_statistic.away_passes_percentage }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span class="stat-value left">{{ fixture_statistic.home_expected_goals }}</span>
+                <span class="stat-name">Ожидаемые голы</span>
+                <span class="stat-value right">{{ fixture_statistic.away_expected_goals }}</span>
+            </li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

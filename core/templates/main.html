@@ -1,0 +1,52 @@
+{% load static %}
+
+{% block style %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{% static '/css/main.css' %}">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center mb-4">
+    <div class="col-lg-8 text-center">
+      <img src="{% static 'image/logo2.png' %}" class="mb-4" alt="YAITech Logo" style="max-width: 300px;">
+      <h1 class="display-4 fw-bold text-success">Добро пожаловать в YAITech</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="features text-center">
+        <div class="row">
+          <div class="col-md-6 col-lg-4 mb-3">
+            <div class="feature-box h-100 p-4">
+              <h2 class="h5 text-success">Интеллектуальный Анализ Событий</h2>
+              <p>Используя передовые алгоритмы машинного обучения, мы обрабатываем огромные массивы данных для точных прогнозов.</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 mb-3">
+            <div class="feature-box h-100 p-4">
+              <h2 class="h5 text-success">Интерактивная Статистика</h2>
+              <p>Предоставляем детальную статистику команд и игроков для глубоких инсайтов каждого соревнования.</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 mb-3">
+            <div class="feature-box h-100 p-4">
+              <h2 class="h5 text-success">Персонализированные Рекомендации</h2>
+              <p>Персонализированные прогнозы и аналитические отчеты, основанные на ваших предпочтениях и интересах.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-4">
+        <a href="/menu" class="btn btn-success btn-lg">Начать использовать</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
