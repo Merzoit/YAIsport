@@ -1,0 +1,9 @@
+body {
+    background-image: url("/static/image/bg3.jpg");
+    font-family: 'Roboto', sans-serif;
+    background-repeat: no-repeat; /* Запрет повторения фоновой картинки */
+    background-size: cover; /* Подгоняет размер фоновой картинки под размер окна */
+    background-attachment: fixed; /* Зафиксировать фоновую картинку */
+    width: 100%;
+    height: 100vh;
+}

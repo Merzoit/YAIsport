@@ -1,0 +1,43 @@
+body {
+  background-image: url("/static/image/bgl.jpg");
+  color: #212529;
+  background-size: 50%;
+  
+}
+
+.feature-box {
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+.feature-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-success {
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.btn-success:hover {
+  color: #fff;
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+.btn-lg {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.25rem;
+  border-radius: 0.3rem;
+}
+
+/* Убедитесь, что ваш стиль логотипа соответствует его размерам */
+.ylogo {
+  max-width: 100%;
+  height: auto;
+}
+
